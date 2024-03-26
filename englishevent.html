@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="englishevent.css">
+</head>
+<body>
+<div id="myDIV" class="header">
+  <h2 style="margin:5px">English Club Events</h2>
+</div>
+
+<div class="action-button">
+  <button class="plus-button">+</button>
+</div>
+
+<ul id="myUL">
+</ul>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+      <div class="popup-header">
+          <h2>Post event</h2>
+      </div>
+      <div class="popup-body">
+        
+        <img id="selectedImage" src="" alt="Selected Image" style="display: none;">
+        <textarea id="title" class="event-name" placeholder="Event Name" maxlength="40"></textarea>
+        <textarea id="description" class="event-details" placeholder="Event details" maxlength="1000"></textarea>
+        <div class="character-count">Max letters: <span id="current-count">0</span>/1000</div>
+
+        <input type="file" id="imageSelector" accept="image/*" onchange="previewImage(event)">
+
+        <span id="post-button" onclick="postEvent()" class="post-button">Post Event</span>
+        <button class="close-button" onclick="closePopup()">Close</button>
+      </div>                
+  </div>
+</div>
+
+<div id="eventpopup" class="eventpopup">
+  
+  <div class="EventPopupHeader">
+    <h2 id="popupTitle"></h2>
+  </div> 
+  <img id="popupImage" src="" alt="Event Image"> 
+  <p id="popupDescription">
+    <img id="popupImage" src="" alt="Event Image" style="max-width: 50%;">
+  </p>
+  <span class="closeevent" onclick="closeeventpopup()">&times;</span>
+</div>
+
+
+
+<div class="backbutton">
+  <a href="home.html"><button class="back"><</button></a>
+</div>
+
+<script>
+  // Open popup function
+  function eventpopup(title, description) {
+    var popupTitle = document.getElementById("popupTitle");
+    var popupDescription = document.getElementById("popupDescription");
+
+    // Popup title and description 
+    popupTitle.textContent = title;
+    popupDescription.textContent = description;
+
+    var popup = document.getElementById("eventpopup");
+    popup.style.display = "block"; // Display the popup
+  }
+
+  // Close popup 
+  function closeeventpopup() {
+    var popup = document.getElementById("eventpopup");
+    popup.style.display = "none"; // Hide the popup
+  }
+
+
+  var myNodelist = document.getElementsByTagName("LI");
+  var i;
+
+  function previewImage(event) {
+    var selectedImage = document.getElementById('selectedImage');
+    var popupImage = document.getElementById('popupImage'); // Get reference to the image in eventpopup
+    var file = event.target.files[0];
+    var reader = new FileReader();
+  
+    reader.onload = function() {
+      selectedImage.src = reader.result;
+      selectedImage.style.display = 'block';
+      // Set the src attribute of the image in eventpopup
+      popupImage.src = reader.result;
+    }
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function postEvent() {
+    var li = document.createElement("li");
+    var titleValue = document.getElementById("title").value;
+    var descriptionValue = document.getElementById("description").value;
+    var titleSpan = document.createElement("SPAN");
+    titleSpan.className = "title";
+    titleSpan.textContent = titleValue;
+    var descriptionSpan = document.createElement("SPAN");
+    descriptionSpan.className = "description";
+    descriptionSpan.textContent = descriptionValue;
+    li.appendChild(titleSpan);
+    
+    if (titleValue === '') {
+      var errorMessage = "You must write something!\n";
+      if (descriptionValue === '') {
+          errorMessage = "Please provide a description.\n";
+      }
+      if (!document.getElementById("selectedImage").src) {
+          errorMessage += "Please select an image.";
+      }
+      alert(errorMessage);
+    } else {
+      var ul = document.getElementById("myUL");
+      var li = document.createElement("li");
+      li.textContent = titleValue;
+      li.onclick = function() {
+        eventpopup(titleValue, descriptionValue);
+      };
+      ul.appendChild(li);
+    }
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+
+  
+    // Close button 
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+  
+    // Add functionality to the new close button
+    span.onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+
+    closePopup();
+  }
+  </script>  
+  <script src="englishevent.js"></script>
+</body>
+</html>

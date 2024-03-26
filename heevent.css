@@ -1,0 +1,417 @@
+body {
+    margin: 0;
+    min-width: 250px;
+  }
+  
+  /* Include the padding and border in an element's total width and height */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Remove margins and padding from the list */
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the list items */
+  ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    margin-left: 25px;
+    margin-right: 25px;
+    border: black;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Set all odd list items to a different color (zebra-stripes) */
+  ul li:nth-child(odd) {
+    background: #f9f9f9;
+  }
+  
+  /* Darker background-color on hover */
+  ul li:hover {
+    background: #ddd;
+  }
+  
+  /* When clicked on, add a background color and strike out text */
+  ul li.checked {
+    background: #888;
+    color: #fff;
+    text-decoration: line-through;
+  }
+  
+  /* Add a "checked" mark when clicked on */
+  ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+  }
+  
+  /* Style the close button */  
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+    color: red;
+    border-radius: 10px
+  }
+  
+  .close:hover {
+    background-color: black;
+    color: red;
+  }
+  
+  /* Style the header */
+  .header {
+    background-color: #284968;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+  }
+  
+  /* Clear floats after the header */
+  .header:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Style the input */
+  input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+  }
+  
+  /* Style the "Add" button */
+  .addBtn {
+    padding: 10px;
+    width: 25%;
+    background: #d9d9d9;
+    color: #555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+  }
+  
+  .addBtn:hover {
+    background-color: #bbb;
+  }
+  
+  .plus-button {
+    position: fixed; 
+    bottom: 50px; 
+    right: 100px; 
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%; 
+    background-color: #284968; 
+    color: white; 
+    border: none;
+    font-size: 50px; 
+    cursor: pointer;
+    z-index: 2;
+    overflow: hidden;
+  }
+  
+  #myUL {
+    padding-bottom: 100px; /* Adjust according to the height of your plus button */
+  }
+  
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1B3954;
+    width: 60%;
+    max-width: 400px;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    height: 80vh;
+  }
+  
+  .popup.fade-in {
+    opacity: 1;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    height: 75vh
+  }
+  
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .popup-header h2 {
+    margin: 0;
+    text-align: center;
+  }
+  
+  .popup-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  
+  }
+  
+  .event-name {
+    width: 20vw;
+    resize: none;
+    height: 5vh;
+    border-radius: 5px;
+  }
+  
+  .event-details {
+    width: 20vw;
+    resize: none;
+    height: 20vh;
+    border-radius: 5px;
+  }
+  
+  .post-button {
+    width: 40%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+  
+  .post-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .close-button {
+    width: 40%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .close-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .character-count {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .backbutton, .back {
+    width: 20%;
+    padding: 10px;
+    background-color: #284968;
+    color: white;
+    border: #2a5c92 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    position: fixed; 
+    top: 35px; 
+    left: 10px; 
+  }
+  
+  /* Styles for the popup */
+  .eventpopup {
+    display: none; 
+    position: fixed; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 20px;
+    z-index: 1000; 
+    width: 90vw;
+    height: 95vh;
+    border-radius: 10px;
+  }
+  
+  
+  .eventpopup h2 {
+    margin-top: 0; /* Remove default margin for h2 */
+    padding-left: 30px;
+    padding-top: 10px;
+  }
+  
+  .eventpopup p {
+    word-wrap: break-word;
+    padding: 0 20px;
+    overflow-y: auto;
+    max-height: calc(100% - 150px); /* Adjust according to the space occupied by other elements */
+  }
+  
+  /* Close button style */
+  .closeevent {
+    position: absolute;
+    top: 28px;
+    right: 40px;
+    cursor: pointer;
+    color: white;
+    font-size: 35px;
+  }
+  
+  
+  .EventPopupHeader {
+    background-color: #284968;
+    padding: 20px 0;
+    color: white;
+    margin: 0;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  #popupDescription {
+    max-height: 300px; /* Limit the height of the description area */
+    overflow-y: auto; /* Enable vertical overflow scrolling */
+    white-space: pre-wrap;
+  }
+  
+  #popupTitle {
+    margin-right: 20px;
+    max-height: 300px; /* Limit the height of the description area */
+    overflow-y: auto; /* Enable vertical overflow scrolling */
+    font-size: 15px;
+  }
+  
+  #popupImage {
+    max-width: 60%;
+    max-height: 40%;
+    display: block;
+    margin: 0 auto;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: black 1px solid;
+  }
+  
+  #selectedImage {
+    max-width: 50%;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .plus-button {
+        position: absolute; 
+        bottom: 20px;
+        right: 20px;
+        width: 60px; 
+        height: 60px; 
+        border-radius: 50%; 
+        background-color: #284968; 
+        color: white; 
+        border: none;
+        font-size: 50px; 
+        cursor: pointer;
+    }
+  
+    .plus-button {
+      position: absolute; 
+      bottom: 25px;
+      right: 30px;
+      width: 70px; 
+      height: 70px; 
+      border-radius: 50%; 
+      background-color: #284968; 
+      color: white; 
+      border: none;
+      font-size: 50px; 
+      cursor: pointer;
+  }
+    .close-button,
+    .post-button {
+        width: 85%; /* Adjust the width for smaller screens */
+    }
+  
+    .event-name,
+    .event-details {
+        width: 95%; /* Adjust the width for smaller screens */
+    }
+  
+    .popup {
+        top: 52%; /* Adjust the top position for smaller screens */
+        width: 85%;
+        height: 85vh;
+        display: flex; /* Use flexbox */
+        flex-direction: column; /* Arrange child elements vertically */
+    }
+  
+    .popup-content {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      height: 80vh;
+    }
+  
+    #popupImage {
+      max-width: 80%;
+      display: block;
+      margin: 0 auto;
+      height: auto;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: black 1px solid;
+    }
+  
+    #popupDescription {
+      max-height: 300px; /* Limit the height of the description area */
+      overflow-y: auto; /* Enable vertical overflow scrolling */
+      white-space: pre-wrap; /* Preserve whitespace */
+    }
+  
+    #popupTitle {
+      font-size: 15px;
+    }
+  
+  }
