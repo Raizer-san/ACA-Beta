@@ -1,112 +1,58 @@
 <!DOCTYPE html>
+
+
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="index.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/index V.2.css">
+    <title>ARELLANO COMPANION APP LOG IN/REGISTRATION</title>
 </head>
-<body class="genbody">    
-    <section id="loginPage" class="page active">
-        <div class="login-card">
-            <div class="login">
-                <h1>Welcome to ACA!</h1>
-                <form id="loginForm" class="login-form">
-                    <input id="username" type="text" name="username" placeholder="Username" class="input-field" maxlength="50" />
-                    <input id="password" type="password" name="password" placeholder="Password" class="input-field" maxlength="20" />
-                    <button id="login" type="button" class="login-button" onclick="login">Log In</button>
-                    <button id="accbutton" type="button" class="acc-button" onclick="showPage('account')">Don't have account?</button>
-                </form>
+
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1 class="adhead">Welcome! </h1>
+                <span class="adp">Before entering our app, we would like to know if you're are using an Admin or Student account</span>
+                <br>
+                <span class="adp">Please select on the left side of the screen for your account type or if you dont have an account, please conatact your adviser </span>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/aujoseabadsantos" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.arellano.edu.ph" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                </div>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1 class="infhead">Welcome Back, Chief!</h1>
+                    <p>Already have a ACA Account?</p>
+                    <button class="hidden" id="regback">Go Back</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1 class="choicehead">Choose your account</h1>
+                    <p>Are you using a student account?</p>
+                    <a href="studlog V.2.html"><button class="hidden" id="registerpage">Student</button></a>
+                    <br>
+                    <p>or an Admin Account?</p>
+                    <a href="adminlog V.2.html"><button class="hidden" id="registerpage">Admin</button></a>
+                </div>
             </div>
         </div>
+    </div>
 
-        
-        <script type="module">
-
-            
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-            import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-
-            
-            const firebaseConfig = {
-                apiKey: "AIzaSyBhscabbNJo4YRJPEV80Kh1XOvKCvkcxnk",
-                authDomain: "neoacadb.firebaseapp.com",
-                databaseURL: "https://neoacadb-default-rtdb.firebaseio.com",
-                projectId: "neoacadb",
-                storageBucket: "neoacadb.appspot.com",
-                messagingSenderId: "497933192563",
-                appId: "1:497933192563:web:7dd8fac202d25c04c74906"
-            };
-    
-            const app = initializeApp(firebaseConfig);
-            const db = getDatabase(app);
-
-            document.getElementById("login").addEventListener('click', function(e){
-                e.preventDefault();
-
-                const username = document.getElementById("username").value;
-                const password = document.getElementById("password").value;
-
-                const userRef = ref(db, 'admin-user/' + username);
-                
-                get(userRef).then((snapshot) => {
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        if (userData.password === password) {
-                            window.location.href = "home.html";
-                        } else {
-                            alert("Incorrect password. Please try again.");
-                        }
-                    } else {
-                        alert("User does not exist. Please register.");
-                    }
-                }).catch((error) => {
-                    console.error("Error fetching user:", error);
-                    alert("An error occurred. Please try again later.");
-                });
-            }); 
-        </script>
-    </section>
-
-    <!-- account Page -->
-    <section id="account" class="page">
-        <div class="account-card">
-            <div class="account">
-                <h1>Create a ACA Account!</h1>
-                <p class="p1">This page will help the students who don't have an ACA account. Instructions are provided in order to guide the students in obtaining their account.</p>
-                <p class="p1"><span class="bold">1.)</span> Check your messenger if your teacher sent you your ACA account and password.</p>
-                <p class="p2"><span class="bold">2.)</span> If your teacher didn't gave you one, message him/her to request an account.</p>
-                <p class="p3"><span class="bold">3.)</span> If the Account and Password used had an error or didn't logged in, ask help on your teacher/advisor to contact the admin of the app.</p>
-                <p class="p4"><span class="bold">4.)</span>After getting your account, make sure that you don't share it with others to preserve the your privacy.</p>
-                <p class="p5">You can Contact the developers via email : <span class="bold">DevAccount@gmail.com</span></p>
-                <form class="acc-back">
-                    <button type="submit" class="back-button" onclick="showPage('account')">Go Back</button>
-                </form>   
-            </div>
-        </div>
-    </section>
-
-
-   
-
-    <script>
-        function showPage(pageId) {
-            // Hide all pages //
-            var pages = document.querySelectorAll('.page');
-            pages.forEach(function (page) {
-                page.classList.remove('active');
-            });
-
-            // Show the requested page //
-            var pageToShow = document.getElementById(pageId);
-            if (pageToShow) {
-                pageToShow.classList.add('active');
-            }
-        }
-    </script>
-
-    <script src="index.js"></script>
 </body>
+
+
 </html>
+
+

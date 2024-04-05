@@ -1,0 +1,581 @@
+body {
+  margin: 0;
+  min-width: 250px;
+}
+
+/* Include the padding and border in an element's total width and height */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove margins and padding from the list */
+ul {
+  margin: 0;
+  padding: 0; 
+  
+}
+
+/* Style the list items */
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+  margin-left: 25px;
+  margin-right: 25px;
+  border: black;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #C6C6CA;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+/* Style the close button */  
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+  color: red;
+  border-radius: 10px;
+}
+
+.close:hover {
+  background-color: black;
+  color: red;
+}
+
+/* Style the header */
+.header {
+  background-color: black;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+  z-index: 3;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.inlineblock {
+  background-color: #284968;
+  padding: 22px 40px;
+  color: white;
+  text-align: center;
+  top: 0px;
+  position: fixed;
+  width: 100vw;
+  z-index: 1;
+}
+
+/* Clear floats after the header */
+.inlineblock:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+input {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+
+.post-bar {
+  position: fixed;
+  background-color: #284968;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+  bottom: 0px;
+  width: 100vw;
+  z-index: 2;
+}
+
+
+
+#myUL {
+  padding-bottom: 100px; /* Adjust according to the height of your plus button */
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1B3954;
+  width: 60%;
+  max-width: 400px;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  height: 80vh;
+  z-index: 3;
+  pointer-events: none; /* Add this line */
+}
+
+.popup.fade-in {
+  opacity: 1;
+  pointer-events: auto; /* Add this line */
+}
+
+.popup-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  height: 75vh
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.popup-header h2 {
+  margin: 0;
+  text-align: center;
+}
+
+.popup-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#eventForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.event-name {
+  width: 20vw;
+  resize: none;
+  height: 5vh;
+  border-radius: 5px;
+}
+
+.event-details {
+  width: 20vw;
+  resize: none;
+  height: 20vh;
+  border-radius: 5px;
+}
+
+.post-button {
+  width: 40%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.post-button:hover {
+  background-color: #0056b3;
+}
+
+.close-button {
+  width: 40%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: #0056b3;
+}
+
+.character-count {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #999;
+}
+
+.backbutton, .back {
+  width: 20%;
+  padding: 10px;
+  background-color: #284968;
+  color: white;
+  border: #2a5c92 2px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  position: fixed; 
+  bottom: 10px; 
+  left: 5px; 
+  z-index: 3;
+}
+
+/* Styles for the popup */
+.eventpopup {
+  display: none; 
+  position: fixed; 
+  left: 50%; 
+  top: 50%; 
+  transform: translate(-50%, -50%); 
+  border: 1px solid #ccc;
+  background-color: #E0E0E0;
+  padding: 20px;
+  z-index: 1000; 
+  width: 90vw;
+  height: 95vh;
+  border-radius: 10px;
+}
+
+
+.eventpopup h2 {
+  margin-top: 0; /* Remove default margin for h2 */
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+.eventpopup p {
+  word-wrap: break-word;
+  padding: 0 20px;
+  overflow-y: auto;
+  max-height: calc(100% - 150px); /* Adjust according to the space occupied by other elements */
+}
+
+/* Close button style */
+.closeevent {
+  position: absolute;
+  top: 28px;
+  right: 40px;
+  cursor: pointer;
+  color: white;
+  font-size: 35px;
+}
+
+
+.EventPopupHeader {
+  background-color: #284968;
+  padding: 20px 0;
+  color: white;
+  margin: 0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+#popupDescription {
+  max-height: 300px; /* Limit the height of the description area */
+  overflow-y: auto; /* Enable vertical overflow scrolling */
+  white-space: pre-wrap;
+}
+
+#popupTitle {
+  margin-right: 20px;
+  max-height: 300px; /* Limit the height of the description area */
+  overflow-y: auto; /* Enable vertical overflow scrolling */
+  font-size: 15px;
+}
+
+#popupImage {
+  max-width: 60%;
+  max-height: 40%;
+  display: block;
+  margin: 0 auto;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: black 1px solid;
+}
+
+#selectedImage {
+  max-width: 50%;
+}
+
+
+
+
+.plus-button {
+  position: absolute; 
+  bottom: 0px;
+  right: 0px;
+  width: 90px; 
+  height: 60px; 
+  background-color: #304D6D; 
+  color: white; 
+  border: none;
+  font-size: 50px; 
+  cursor: pointer;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+#confirmation-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border: 2px solid #1B3954;
+  padding: 20px;
+  background-color: #1B3954; /* Optional background color */
+  border-radius: 5px; /* Optional border radius */
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Adjust as needed */
+  width: 35vw;
+  height: 23vh;
+}
+
+#confirmcontent {
+  background-color: white; /* Optional background color */
+  border-radius: 5px; /* Optional border radius */
+  height: 35vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32vw;
+  height: 18vh;
+}
+
+#confirmation-popup p {
+  margin-bottom: 10px;
+}
+
+#confirmation-popup button {
+  margin-right: 10px;
+}
+
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 999; /* Lower z-index than confirmation popup */
+}
+
+#confirm-yes, #confirm-no {
+  width: 40%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 20px;
+}
+
+#confirm-head {
+  margin-right: 20px;
+  max-height: 300px; /* Limit the height of the description area */
+  overflow-y: auto; /* Enable vertical overflow scrolling */
+  font-size: 20px;
+  margin-left: 10px;
+  padding-bottom: 15px;
+  font-weight: bold;
+}
+
+#myDIV {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image {
+  flex-shrink: 0;
+  margin-right: 10px; /* Adjust this value as needed */
+  float: right;
+  margin-left: 10px; /* Adjust this value as needed */
+}
+
+.card-image .card-img {
+  height: 50px; /* Adjust the height as needed */
+  width: 50px; /* Adjust the width as needed */
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #4070F4;
+}
+
+@media (max-width: 768px) {
+  .plus-button {
+      position: absolute; 
+      bottom: 0px;
+      right: 0px;
+      width: 90px; 
+      height: 60px; 
+      background-color: #304D6D; 
+      color: white; 
+      border: none;
+      font-size: 50px; 
+      cursor: pointer;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+  }
+
+  
+  .close-button,
+  .post-button {
+      width: 85%; /* Adjust the width for smaller screens */
+  }
+
+  .event-name,
+  .event-details {
+      width: 95%; /* Adjust the width for smaller screens */
+  }
+
+  .popup {
+      top: 48%; /* Adjust the top position for smaller screens */
+      width: 85%;
+      height: 80vh;
+      display: flex; /* Use flexbox */
+      flex-direction: column; /* Arrange child elements vertically */
+      z-index: 1;
+  }
+
+  .popup-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    height: 74vh;
+  }
+
+  #popupImage {
+    max-width: 80%;
+    display: block;
+    margin: 0 auto;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: black 1px solid;
+  }
+
+  #popupDescription {
+    max-height: 300px; /* Limit the height of the description area */
+    overflow-y: auto; /* Enable vertical overflow scrolling */
+    white-space: pre-wrap; /* Preserve whitespace */
+  }
+
+  #popupTitle {
+    font-size: 15px;
+  }
+
+  #confirmation-popup {
+    padding: 20px;
+    width: 77vw;
+    height: 23vh;
+  }
+  
+  #confirmcontent {
+    width: 72vw;
+    height: 18vh;
+  }
+  
+  #confirmation-popup p {
+    margin-bottom: 10px;
+  }
+  
+  #confirmation-popup button {
+    margin-right: 10px;
+  }
+  
+  .confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 999; /* Lower z-index than confirmation popup */
+  }
+  
+  #confirm-yes, #confirm-no {
+    width: 40%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+  }
+  
+  #confirm-head {
+    margin-right: 20px;
+    max-height: 300px; /* Limit the height of the description area */
+    overflow-y: auto; /* Enable vertical overflow scrolling */
+    font-size: 20px;
+    margin-left: 10px;
+    padding-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .eventpopup p {
+    word-wrap: break-word;
+    padding: 0 20px;
+    overflow-y: auto;
+    max-height: calc(100% - 100px); /* Adjust according to the space occupied by other elements */
+  }
+
+}

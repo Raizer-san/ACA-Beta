@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/ictevent.css">
+<link rel="stylesheet" href="studcss/Student-FIL.css">
 </head>
 <body>
 <div id="myDIV" class="header">
@@ -10,41 +10,20 @@
 </div>
 
 <div id="myDIV" class="inlineblock">
-  <h2 style="margin:5px">ICT Events</h2>
+  <h2 style="margin:5px">FILIPINO Events</h2>
 
   <div class="card-image">
-    <img src="https://i.ibb.co/84M2nZr/1.jpg" alt="" class="card-img">
+    <img src="https://i.ibb.co/k9SgRvd/10.jpg" alt="" class="card-img">
   </div>
 </div>
 
+
+
 <div class="post-bar">
-  <button class="plus-button">+</button>
 </div>
 
 <ul id="myUL">
 </ul>
-
-
-
-<div class="popup" id="popup">
-  <div class="popup-content">
-      <div class="popup-header">
-          <h2>Post event</h2>
-      </div>
-      <div class="popup-body">
-        <form id="eventForm" onsubmit="submitForm(event)">
-          <img id="selectedImage" src="" alt="Selected Image" style="display: none;">
-          <textarea id="title" class="event-name" placeholder="Event Name" maxlength="40"></textarea>
-          <textarea id="description" class="event-details" placeholder="Event details" maxlength="1000"></textarea>
-          <div class="character-count">Max letters: <span id="current-count">0</span>/1000</div>
-          <input type="file" id="imageSelector" accept="image/*" onchange="previewImage(event)">
-
-          <button type="submit" id="post-button" class="post-button" >Post Event</button>
-          <button type="button" class="close-button" onclick="closePopup()">Close</button>
-        </form>
-      </div>                
-  </div>
-</div>
 
 <div id="eventpopup" class="eventpopup">
   
@@ -68,7 +47,7 @@
 </div>
 
 <div class="backbutton">
-  <a href="home.html"><button class="back"><</button></a>
+  <a href="studenthome.html"><button class="back"><</button></a>
 </div>
 
 <script>
@@ -131,7 +110,7 @@ function requestNotificationPermission() {
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="ictevent.js"></script>
-    <script src="js/ictevent.js"></script>
+    <script src="studjs/Student-FIL.js"></script>
 
     <script>
       // Initialize Firebase

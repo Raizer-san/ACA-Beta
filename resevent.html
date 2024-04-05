@@ -2,19 +2,29 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="resevent.css">
+<link rel="stylesheet" href="css/resevent.css">
 </head>
 <body>
 <div id="myDIV" class="header">
-  <h2 style="margin:5px">Research Club Events</h2>
+  <h2 style="margin:5px">inline</h2>
 </div>
 
-<div class="action-button">
+<div id="myDIV" class="inlineblock">
+  <h2 style="margin:5px">Research Club Events</h2>
+
+  <div class="card-image">
+    <img src="https://i.ibb.co/K2VntdS/9.jpg" alt="" class="card-img">
+  </div>
+</div>
+
+<div class="post-bar">
   <button class="plus-button">+</button>
 </div>
 
 <ul id="myUL">
 </ul>
+
+
 
 <div class="popup" id="popup">
   <div class="popup-content">
@@ -22,16 +32,16 @@
           <h2>Post event</h2>
       </div>
       <div class="popup-body">
-        
-        <img id="selectedImage" src="" alt="Selected Image" style="display: none;">
-        <textarea id="title" class="event-name" placeholder="Event Name" maxlength="40"></textarea>
-        <textarea id="description" class="event-details" placeholder="Event details" maxlength="1000"></textarea>
-        <div class="character-count">Max letters: <span id="current-count">0</span>/1000</div>
+        <form id="eventForm" onsubmit="submitForm(event)">
+          <img id="selectedImage" src="" alt="Selected Image" style="display: none;">
+          <textarea id="title" class="event-name" placeholder="Event Name" maxlength="40"></textarea>
+          <textarea id="description" class="event-details" placeholder="Event details" maxlength="1000"></textarea>
+          <div class="character-count">Max letters: <span id="current-count">0</span>/1000</div>
+          <input type="file" id="imageSelector" accept="image/*" onchange="previewImage(event)">
 
-        <input type="file" id="imageSelector" accept="image/*" onchange="previewImage(event)">
-
-        <span id="post-button" onclick="postEvent()" class="post-button">Post Event</span>
-        <button class="close-button" onclick="closePopup()">Close</button>
+          <button type="submit" id="post-button" class="post-button" >Post Event</button>
+          <button type="button" class="close-button" onclick="closePopup()">Close</button>
+        </form>
       </div>                
   </div>
 </div>
@@ -49,10 +59,31 @@
 </div>
 
 
+<div id="confirmation-popup" style="display: none;">
+  <div id="confirmcontent">
+    <p id="confirm-head">Delete selected event?</p>
+    <button id="confirm-yes">Yes</button>
+    <button id="confirm-no">No</button>
+  </div>
+</div>
 
 <div class="backbutton">
   <a href="home.html"><button class="back"><</button></a>
 </div>
+
+<script>
+// Function to request permission for push notifications
+function requestNotificationPermission() {
+  Notification.requestPermission().then(function(permission) {
+    if (permission === 'granted') {
+      console.log('Notification permission granted.');
+      // You can proceed with sending notifications here
+    } else {
+      console.log('Notification permission denied.');
+    }
+  });
+}
+</script>
 
 <script>
   // Open popup function
@@ -74,78 +105,67 @@
     popup.style.display = "none"; // Hide the popup
   }
 
+ 
+ function eventpopup(title, description, imageUrl) {
+  var popupTitle = document.getElementById("popupTitle");
+  var popupDescription = document.getElementById("popupDescription");
+  var popupImage = document.getElementById("popupImage");
+
+  popupTitle.textContent = title;
+  popupDescription.textContent = description;
+  popupImage.src = imageUrl
+  
+  var popup = document.getElementById("eventpopup");
+  popup.style.display = "block"; // Display the popup
+}
 
   var myNodelist = document.getElementsByTagName("LI");
   var i;
 
-  function previewImage(event) {
-    var selectedImage = document.getElementById('selectedImage');
-    var popupImage = document.getElementById('popupImage'); // Get reference to the image in eventpopup
-    var file = event.target.files[0];
-    var reader = new FileReader();
   
-    reader.onload = function() {
-      selectedImage.src = reader.result;
-      selectedImage.style.display = 'block';
-      // Set the src attribute of the image in eventpopup
-      popupImage.src = reader.result;
-    }
   
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  }
-
-  function postEvent() {
-    var li = document.createElement("li");
-    var titleValue = document.getElementById("title").value;
-    var descriptionValue = document.getElementById("description").value;
-    var titleSpan = document.createElement("SPAN");
-    titleSpan.className = "title";
-    titleSpan.textContent = titleValue;
-    var descriptionSpan = document.createElement("SPAN");
-    descriptionSpan.className = "description";
-    descriptionSpan.textContent = descriptionValue;
-    li.appendChild(titleSpan);
-    
-    if (titleValue === '') {
-      var errorMessage = "You must write something!\n";
-      if (descriptionValue === '') {
-          errorMessage = "Please provide a description.\n";
-      }
-      if (!document.getElementById("selectedImage").src) {
-          errorMessage += "Please select an image.";
-      }
-      alert(errorMessage);
-    } else {
-      var ul = document.getElementById("myUL");
-      var li = document.createElement("li");
-      li.textContent = titleValue;
-      li.onclick = function() {
-        eventpopup(titleValue, descriptionValue);
-      };
-      ul.appendChild(li);
-    }
-    document.getElementById("title").value = "";
-    document.getElementById("description").value = "";
-
-  
-    // Close button 
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    li.appendChild(span);
-  
-    // Add functionality to the new close button
-    span.onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-
-    closePopup();
-  }
   </script>  
-  <script src="resevent.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="ictevent.js"></script>
+    <script src="js/resevent.js"></script>
+
+    <script>
+      // Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyBhscabbNJo4YRJPEV80Kh1XOvKCvkcxnk",
+        authDomain: "neoacadb.firebaseapp.com",
+        databaseURL: "https://neoacadb-default-rtdb.firebaseio.com",
+        projectId: "neoacadb",
+        storageBucket: "neoacadb.appspot.com",
+        messagingSenderId: "497933192563",
+        appId: "1:497933192563:web:7dd8fac202d25c04c74906",
+        measurementId: "G-EEV5VK6PF5"
+      };
+    
+      firebase.initializeApp(firebaseConfig);
+    
+      // Access Firebase Messaging
+      const messaging = firebase.messaging();
+    
+      // Request permission for notifications
+      function requestPermission() {
+        Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+            console.log('Notification permission granted.');
+            // Handle user's permission
+          } else {
+            console.log('Unable to get permission to notify.');
+          }
+        });
+      }
+      
+      // Request permission for notifications
+
+    </script>
+
 </body>
 </html>

@@ -142,11 +142,6 @@ body{
     border: 2px solid #4070F4;
 }
 
-.social-icons{
-    margin: 20px 0;
-}
-
-
 .social-icons a{
     position: absolute;
     background-color: rgba(28, 49, 68, 1);
@@ -162,7 +157,6 @@ body{
     right: 5%;
     border: 2px solid #4070F4;
 }
-
 @media screen and (max-width: 768px) {
     .slide-content{
         margin: 0 10px;
